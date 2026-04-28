@@ -4,55 +4,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Users, Shield, Clock, Database, Award, TrendingUp, Ship, CheckCircle, Headphones, ChevronDown, Heart, FileCheck } from "lucide-react";
+import { motion } from "framer-motion";
 
-const base = import.meta.env.BASE_URL;
-
-function HeroVideo({ src, poster }: { src: string; poster: string }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const el = videoRef.current;
-    return () => {
-      if (!el) return;
-      el.pause();
-      el.removeAttribute("src");
-      el.load();
-    };
-  }, []);
-
-  return (
-    <video
-      ref={videoRef}
-      src={src}
-      autoPlay
-      muted
-      playsInline
-      preload="metadata"
-      onLoadedMetadata={(e) => {
-        try {
-          e.currentTarget.playbackRate = 0.5;
-        } catch {
-          /* Safari / strict mode */
-        }
-      }}
-      onError={() => {
-        /* Avoid surfacing decode/network errors as uncaught */
-      }}
-      poster={poster}
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: "40% 58%",
-        filter: "blur(1.1px) brightness(0.82) saturate(1.08)",
-        transform: "scale(1.08)", // compensate for blur edge bleed
-        willChange: "transform",
-      }}
-    />
-  );
-}
+const MotionCard = motion.create(Card);
 
 import backgroundPhoto from "@assets/stock_images/Gemini_Generated_Image_x18mj0x18mj0x18m.png";
 
@@ -68,7 +22,11 @@ export default function Home() {
       <div className="relative z-10 w-full">
         {/* ═══════════ HERO ═══════════ */}
         <section className="py-24 pt-32 relative flex flex-col items-center justify-center min-h-[90vh] z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
             <h1
                   className="font-headline text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.65)]"
                   data-testid="text-hero-tagline"
@@ -108,11 +66,17 @@ export default function Home() {
                   </Link>
                 </div>
 
-            <div className="mt-20 text-center relative z-10">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="mt-20 text-center relative z-10">
               <ChevronDown className="inline-block w-8 h-8 text-white/70 hover:text-white transition-colors animate-bounce" aria-hidden="true" />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
+
+        {/* ═══════════ FRESH VISION ═══════════ */}
         <section className="py-24 relative overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
@@ -129,44 +93,61 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="glass-card text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fresh-vision-psychological">
+              <MotionCard 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="glass-card text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fresh-vision-psychological">
                 <CardHeader>
                   <Heart className="w-12 h-12 mx-auto mb-4 text-primary transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3" />
                   <CardTitle className="font-headline">Psychological Care</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base text-white/80">
                     Psychological support for both the seafarer and their spouse helps maintain emotional stability, trust, and resilience during long contracts.
                   </CardDescription>
                 </CardContent>
-              </Card>
+              </MotionCard>
 
-              <Card className="glass-card text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fresh-vision-processing">
+              <MotionCard 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="glass-card text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fresh-vision-processing">
                 <CardHeader>
-                  <FileCheck className="w-12 h-12 mx-auto mb-4 text-primary transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-3" />
+                  <FileCheck className="w-12 h-12 mx-auto mb-4 text-primary transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3" />
                   <CardTitle className="font-headline">Modern Processing</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base text-white/80">
                     Every ongoing candidate processing throughout our selection system with verified stages and inspected by our specialists.
                   </CardDescription>
                 </CardContent>
-              </Card>
+              </MotionCard>
 
-              <Card className="glass-card text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fresh-vision-partnerships">
+              <MotionCard 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="glass-card text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fresh-vision-partnerships">
                 <CardHeader>
                   <Users className="w-12 h-12 mx-auto mb-4 text-primary transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3" />
                   <CardTitle className="font-headline">Long-Term Partnerships</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base text-white/80">
                     Building lasting relationships based on trust, reliability, and mutual growth with both ship-owners and seafarers
                   </CardDescription>
                 </CardContent>
-              </Card>
+              </MotionCard>
             </div>
           </div>
         </section>
+
+        {/* ═══════════ SHIP OWNERS BENEFITS ═══════════ */}
         <section className="py-24 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -179,29 +160,39 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <Card className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-compliance">
+              <MotionCard 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-compliance">
                 <CardHeader className="flex flex-row items-center gap-4">
                   <Shield className="w-10 h-10 text-primary flex-shrink-0 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
-                  <CardTitle className="font-headline text-lg">Compliance & Certifications</CardTitle>
+                  <CardTitle className="font-headline text-lg text-white">Compliance & Certifications</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/70">
                     Full compliance with international maritime standards, comprehensive vetting, medical checks, and certification management
                   </p>
                 </CardContent>
-              </Card>
+              </MotionCard>
 
-              <Card className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-database">
+              <MotionCard 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-database">
                 <CardHeader className="flex flex-row items-center gap-4">
-                  <Database className="w-10 h-10 text-primary flex-shrink-0 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-6" />
-                  <CardTitle className="font-headline text-lg">Experienced Crew Database</CardTitle>
+                  <Database className="w-10 h-10 text-primary flex-shrink-0 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
+                  <CardTitle className="font-headline text-lg text-white">Experienced Crew Database</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/70">
                     Access to 500+ verified professionals across ranks and vessel types - including containers, bulk, tankers, and more
                   </p>
                 </CardContent>
-              </Card>
+              </MotionCard>
             </div>
 
             <div className="text-center">
@@ -215,65 +206,87 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ═══════════ SEAFARERS WHY ═══════════ */}
         <section className="py-24 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[0px] mb-[0px] pt-[24px] pb-[24px]">
             <div className="text-center mb-16">
               <h2 className="font-headline text-3xl sm:text-4xl font-bold mb-4" data-testid="heading-seafarers-why">
                 For Seafarers - Why AURA SEA?
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg text-white/80 max-w-3xl mx-auto">
                 Transparent contracts, timely payments, and real career growth
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-              <Card className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fair-contracts">
+              <MotionCard 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-fair-contracts">
                 <CardHeader>
                   <CheckCircle className="w-10 h-10 text-primary mb-4 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
-                  <CardTitle className="font-headline">Fair Contracts</CardTitle>
+                  <CardTitle className="font-headline text-white">Fair Contracts</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/70">
                     Clear contract terms with no hidden clauses. We ensure you understand every detail before signing
                   </p>
                 </CardContent>
-              </Card>
+              </MotionCard>
 
-              <Card className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-timely-payment">
+              <MotionCard 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-timely-payment">
                 <CardHeader>
-                  <Clock className="w-10 h-10 text-primary mb-4 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-6" />
-                  <CardTitle className="font-headline">Timely Payment</CardTitle>
+                  <Clock className="w-10 h-10 text-primary mb-4 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
+                  <CardTitle className="font-headline text-white">Timely Payment</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/70">
                     Reliable, on-time salary payments. Your financial security is our priority
                   </p>
                 </CardContent>
-              </Card>
+              </MotionCard>
 
-              <Card className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-career-support">
+              <MotionCard 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-career-support">
                 <CardHeader>
                   <TrendingUp className="w-10 h-10 text-primary mb-4 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
-                  <CardTitle className="font-headline">Career Support & Training</CardTitle>
+                  <CardTitle className="font-headline text-white">Career Support & Training</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/70">
                     Access to training opportunities and career advancement pathways. We invest in your professional growth
                   </p>
                 </CardContent>
-              </Card>
+              </MotionCard>
 
-              <Card className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-family-support">
+              <MotionCard 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="glass-card group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30" data-testid="card-family-support">
                 <CardHeader>
                   <Headphones className="w-10 h-10 text-primary mb-4 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
-                  <CardTitle className="font-headline">Family/ Seaman's Psychological Support</CardTitle>
+                  <CardTitle className="font-headline text-white">Family/ Seaman's Psychological Support</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    When families are supported, seafarers perform better, return home healthier, and long-term careers at sea become sustainable. Our crewing agency provides access to professional family psychologists for both seafarers and their spouses.
+                  <p className="text-sm text-white/70">
+                    When families are supported, seafarers perform better, return home healthier, and long-term careers at sea become sustainable.
                   </p>
                 </CardContent>
-              </Card>
+              </MotionCard>
             </div>
 
             <div className="text-center">
@@ -287,14 +300,21 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ═══════════ FINAL CTA ═══════════ */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <Card className="glass-premium p-12 border-2 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 group">
-              <h2 className="font-headline text-2xl sm:text-3xl font-bold mb-6" data-testid="heading-cta">
+            <MotionCard 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="glass-premium p-12 border-2 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 group">
+              <h2 className="font-headline text-2xl sm:text-3xl font-bold mb-6 text-white" data-testid="heading-cta">
                 Ready to Partner with AURA SEA?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg text-white/80 mb-8">
                 Let's discuss how we can support your crewing needs or advance your maritime career
               </p>
               <Link
@@ -304,7 +324,7 @@ export default function Home() {
               >
                 Contact AURA SEA
               </Link>
-            </Card>
+            </MotionCard>
           </div>
         </section>
       </div>

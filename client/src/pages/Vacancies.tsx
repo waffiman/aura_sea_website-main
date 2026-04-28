@@ -94,7 +94,12 @@ export default function Vacancies() {
 
       {/* ═══════════ HERO ═══════════ */}
       <section className="py-24 pt-32 relative flex items-center z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full scroll-animate">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="relative rounded-3xl border border-white/10 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] min-h-[400px] flex items-center">
             {/* Background Image */}
             <div
@@ -119,7 +124,7 @@ export default function Vacancies() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-16 relative z-10">

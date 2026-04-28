@@ -27,7 +27,12 @@ export default function Seafarers() {
 
       {/* ═══════════ HERO ═══════════ */}
       <section className="py-24 pt-32 relative flex items-center z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full scroll-animate">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="relative rounded-3xl border border-white/10 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] min-h-[400px] flex items-center">
             {/* Background Image */}
             <div
@@ -49,7 +54,7 @@ export default function Seafarers() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <div className="relative z-10">
@@ -61,6 +66,7 @@ export default function Seafarers() {
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              {/* What We Offer Cards */}
               {[
                 {
                   icon: FileText,
@@ -97,9 +103,13 @@ export default function Seafarers() {
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <Card
+                  <MotionCard
                     key={item.title}
-                    className={`glass-card h-full group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 scroll-animate scroll-animate-delay-${i + 1}`}
+                    initial={{ opacity: 0, y: 40, x: 0, scale: 1 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: (0.1 + (i * 0.2)).toFixed(1), ease: "easeOut" }}
+                    className={`glass-card h-full group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30`}
                     data-testid={item.testId}
                   >
                     <CardHeader className="text-center">
@@ -263,7 +273,13 @@ export default function Seafarers() {
               {applicationSteps.map((step, i) => {
                 const Icon = step.icon;
                 return (
-                  <div key={step.number} className={`flex gap-5 group cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/10 scroll-animate scroll-animate-delay-${i + 1}`}>
+                  <motion.div 
+                    key={step.number} 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: (i * 0.15).toFixed(2) }}
+                    className={`flex gap-5 group cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/10`}>
                     <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center z-10 shadow-lg shadow-cyan-900/30">
                       <Icon className="w-7 h-7 text-foreground" />
                     </div>
@@ -274,7 +290,7 @@ export default function Seafarers() {
                       </div>
                       <p className="text-sm text-muted-foreground font-light leading-relaxed">{step.description}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

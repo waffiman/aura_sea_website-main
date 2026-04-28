@@ -38,7 +38,12 @@ export default function ShipOwners() {
 
       {/* ═══════════ HERO ═══════════ */}
       <section className="py-24 pt-32 relative flex items-center z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full scroll-animate">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="relative rounded-3xl border border-white/10 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] min-h-[400px] flex items-center">
             {/* Background Image */}
             <div
@@ -59,7 +64,7 @@ export default function ShipOwners() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <div className="relative z-10">
@@ -141,6 +146,7 @@ export default function ShipOwners() {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Compliance & Safety Cards */}
               {[
                 {
                   icon: Shield,
@@ -177,9 +183,13 @@ export default function ShipOwners() {
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <Card
+                  <MotionCard
                     key={item.title}
-                    className={`glass-card h-full group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 scroll-animate scroll-animate-delay-${i + 1}`}
+                    initial={{ opacity: 0, y: 40, x: 0, scale: 1 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: (0.1 + (i * 0.2)).toFixed(1), ease: "easeOut" }}
+                    className={`glass-card h-full group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30`}
                     data-testid={item.testId}
                   >
                     <CardHeader>
@@ -191,7 +201,7 @@ export default function ShipOwners() {
                     <CardContent>
                       <p className="text-sm text-muted-foreground font-light leading-relaxed">{item.desc}</p>
                     </CardContent>
-                  </Card>
+                  </MotionCard>
                 );
               })}
             </div>

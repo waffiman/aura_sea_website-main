@@ -149,9 +149,13 @@ export default function About() {
               {missionVisionValues.map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <Card
+                  <MotionCard
                     key={item.title}
-                    className={`glass-card h-full text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 scroll-animate scroll-animate-delay-${i + 1}`}
+                    initial={{ opacity: 0, y: 40, x: 0, scale: 1 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: (0.1 + (i * 0.2)).toFixed(1), ease: "easeOut" }}
+                    className={`glass-card h-full text-center group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30`}
                     data-testid={`card-about-${item.title.toLowerCase()}`}
                   >
                     <CardHeader>
@@ -385,9 +389,13 @@ export default function About() {
               {coreValues.map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <Card
+                  <MotionCard
                     key={item.title}
-                    className={`glass-card h-full group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 scroll-animate scroll-animate-delay-${Math.min(i + 1, 4)}`}
+                    initial={{ opacity: 0, y: 40, x: 0, scale: 1 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: (0.1 + (Math.min(i, 3) * 0.2)).toFixed(1), ease: "easeOut" }}
+                    className={`glass-card h-full group cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30`}
                     data-testid={`card-core-value-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     <CardHeader className="flex flex-row items-start gap-4 space-y-0">
@@ -416,9 +424,13 @@ export default function About() {
               {leadership.map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <Card
+                  <MotionCard
                     key={item.title}
-                    className={`glass-card text-center group transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 scroll-animate scroll-animate-delay-${i + 1}`}
+                    initial={{ opacity: 0, y: 40, x: 0, scale: 1 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: (0.1 + (i * 0.2)).toFixed(1), ease: "easeOut" }}
+                    className={`glass-card text-center group transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30`}
                     data-testid={`card-leadership-${item.badge.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     <CardHeader className="items-center pb-2">

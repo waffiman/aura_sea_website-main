@@ -45,14 +45,19 @@ export default function Contact() {
 
       {/* ═══════════ HERO ═══════════ */}
       <section className="py-24 pt-32 relative flex items-center z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-animate">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-headline text-4xl sm:text-5xl font-bold mb-6 text-white drop-shadow-md" data-testid="heading-contact">
             Contact AURA SEA
           </h1>
           <p className="text-lg text-white drop-shadow-md font-light max-w-2xl mx-auto">
             Whether you're a ship-owner looking for reliable crew management or a seafarer interested in opportunities, we're here to help.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* ═══════════ FORM + INFO ═══════════ */}
@@ -61,7 +66,12 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
             {/* ── Contact Form (wider) ── */}
-            <div className="lg:col-span-3 scroll-animate">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-3">
               <div className="glass-card rounded-xl p-6 sm:p-8 h-full flex flex-col group transition-all duration-300 hover:shadow-2xl hover:border-cyan-500/30">
                 <div className="flex items-center gap-3 mb-6">
                   <Send className="w-5 h-5 text-cyan-400 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-1" />
@@ -123,10 +133,15 @@ export default function Contact() {
                   </form>
                 )}
               </div>
-            </div>
+            </motion.div>
 
             {/* ── Contact Info (narrower) ── */}
-            <div className="lg:col-span-2 space-y-6 scroll-animate-right">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="lg:col-span-2 space-y-6">
               {/* Contact details */}
               <div className="glass-card rounded-xl p-6 group transition-all duration-300 hover:shadow-2xl hover:border-cyan-500/30">
                 <h3 className="font-headline text-lg font-medium text-foreground mb-5">Contact Information</h3>
@@ -188,7 +203,7 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
