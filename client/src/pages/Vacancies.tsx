@@ -79,7 +79,7 @@ export default function Vacancies() {
                 <span className="text-xs font-medium text-emerald-50 tracking-wider uppercase">Live Updates</span>
               </div>
               <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg tracking-tight" data-testid="heading-vacancies">
-                Real-Time Vacancies
+                Current Vacancies
               </h1>
               <p className="text-lg sm:text-xl font-light leading-relaxed max-w-2xl mx-auto lg:mx-0 text-white/90 drop-shadow-md">
                 We publish all current hot vacancies in our social media channels. Subscribe to stay updated and never miss an opportunity.
