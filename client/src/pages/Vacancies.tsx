@@ -131,15 +131,6 @@ export default function Vacancies() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════ FOOTER CTA OVERLAY ═══════════ */}
-      <section className="py-12 relative z-10">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-sm text-white/40 italic">
-            Dashboard for direct applications is coming soon. In the meantime, please use the links above to apply via messengers or social media.
-          </p>
-        </div>
-      </section>
     </div>
   );
 }
