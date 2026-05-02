@@ -54,7 +54,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="tel:+380978458147" className="text-muted-foreground hover:text-foreground" data-testid="footer-phone">
+                <a href="https://wa.me/380978458147" className="text-muted-foreground hover:text-foreground" data-testid="footer-phone">
                   +380978458147 (Whatsapp, Telegram)
                 </a>
               </li>
