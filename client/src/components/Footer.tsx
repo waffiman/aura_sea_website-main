@@ -48,8 +48,8 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="mailto:c2vseajobs@gmail.com" className="text-muted-foreground hover:text-foreground" data-testid="footer-email">
-                  c2vseajobs@gmail.com
+                <a href="mailto:crewing@aurasea.org" className="text-muted-foreground hover:text-foreground" data-testid="footer-email">
+                  crewing@aurasea.org
                 </a>
               </li>
               <li className="flex items-start gap-2">
