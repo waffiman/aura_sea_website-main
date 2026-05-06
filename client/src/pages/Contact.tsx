@@ -4,11 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, MapPin, Clock, CheckCircle, Send } from "lucide-react";
 import { motion } from "framer-motion";
 const MotionCard = motion.create(Card);
-import { Link } from "wouter";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import contactHero from "@assets/stock_images/stormy_sea_contact.png";
 
@@ -16,23 +14,42 @@ export default function Contact() {
   useScrollAnimation();
 
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     subject: "",
     message: "",
-    gdprConsent: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact Form Submitted:", formData);
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false);
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "", gdprConsent: false });
-    }, 5000);
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "48acb724-2b91-4a54-a9be-dc0a1458794f",
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (!res.ok) throw new Error(`Web3Forms error: ${res.status}`);
+
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -118,17 +135,13 @@ export default function Contact() {
                         className="mt-1 flex-grow bg-background/60 border-border text-foreground placeholder:text-muted-foreground min-h-[150px]" data-testid="textarea-message" />
                     </div>
 
-                    <div className="flex items-start gap-2">
-                      <Checkbox id="gdpr" required checked={formData.gdprConsent} onCheckedChange={(checked) => setFormData({ ...formData, gdprConsent: checked as boolean })}
-                        className="border-white/20 data-[state=checked]:bg-cyan-600 data-[state=checked]:border-cyan-600" data-testid="checkbox-gdpr" />
-                      <Label htmlFor="gdpr" className="text-sm leading-tight cursor-pointer text-muted-foreground font-light">
-                        I consent to AURA SEA storing and processing my personal data in accordance with the{" "}
-                        <Link href="/privacy"><span className="text-cyan-400 hover:underline">Privacy Policy</span></Link>
-                      </Label>
-                    </div>
-
-                    <Button type="submit" className="w-full font-normal transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:shadow-lg hover:shadow-cyan-500/20" data-testid="button-submit-contact">
-                      Send Message
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full font-normal transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:shadow-lg hover:shadow-cyan-500/20"
+                      data-testid="button-submit-contact"
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 )}
@@ -147,7 +160,7 @@ export default function Contact() {
                 <h3 className="font-headline text-lg font-medium text-foreground mb-5">Contact Information</h3>
                 <div className="space-y-5">
                   {[
-                    { icon: Mail, label: "Email", value: "c2vseajobs@gmail.com", href: "mailto:c2vseajobs@gmail.com", testId: "contact-email" },
+                    { icon: Mail, label: "Email", value: "crewing@aurasea.org", href: "mailto:crewing@aurasea.org", testId: "contact-email" },
                     { icon: Phone, label: "Phone", value: "+380978458147 (Whatsapp, Telegram)", href: "tel:+380978458147", testId: "contact-phone" },
                   ].map((item) => {
                     const Icon = item.icon;
