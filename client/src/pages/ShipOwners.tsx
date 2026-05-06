@@ -247,13 +247,13 @@ export default function ShipOwners() {
               <p className="text-lg text-muted-foreground mb-8 font-light max-w-2xl mx-auto leading-relaxed">
                 Contact us today to learn how AURA SEA can become your reliable crewing partner.
               </p>
-              <Link
-                href="/contact"
+              <a
+                href="mailto:partner@aurasea.org"
                 className={cn(buttonVariants({ size: "lg" }), "inline-flex font-normal px-8 h-12 text-base transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] hover:shadow-lg hover:shadow-cyan-500/20")}
                 data-testid="button-contact-ship-owners"
               >
                 Get in Touch
-              </Link>
+              </a>
             </div>
           </div>
         </section>
