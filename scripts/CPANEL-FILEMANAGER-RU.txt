@@ -1,0 +1,32 @@
+﻿cPanel File Manager (HTTPS) — заливка сайта AURA SEA
+
+1) Соберите архив (если еще нет файла aurasea-public_html.zip в корне проекта):
+   В папке aura_sea_website-main выполните:
+   npm run pack:cpanel
+   Архив: aura_sea_website-main\aurasea-public_html.zip
+
+2) Откройте в ОБЫЧНОМ браузере (Chrome / Edge), не из встроенного браузера IDE:
+   https://c4.asurahosting.com/cpanel
+   Логин и пароль — из письма Asura (аккаунт auraseao).
+
+   Альтернатива, когда домен привязан:
+   https://www.aurasea.org:2083/
+
+3) В cPanel нажмите «File Manager» (Диспетчер файлов).
+
+4) Слева или сверху откройте папку public_html (это корень сайта).
+
+5) По желанию: сделайте резервную копию старых файлов (выделить → Compress).
+
+6) Нажмите «Upload», загрузите файл aurasea-public_html.zip с диска (путь к проекту см. выше).
+
+7) После загрузки: в File Manager выберите aurasea-public_html.zip → Extract / Распаковать.
+   Распаковывайте прямо в public_html (в текущую папку).
+
+8) Проверьте: в public_html должны лежать index.html, папка assets, файл .htaccess (включите «Show Hidden Files» в настройках File Manager, если не видно).
+
+9) Если после распаковки появилась лишняя вложенная папка — перенесите ВСЕ файлы на уровень public_html.
+
+10) Откройте сайт: https://www.aurasea.org
+
+Примечание: встроенный браузер Cursor до cPanel часто не подключается — используйте обычный браузер на ПК.
