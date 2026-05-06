@@ -1,4 +1,5 @@
 import { Router as WouterRouter, Switch, Route } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
@@ -32,7 +33,7 @@ function App() {
   return (
     <TooltipProvider>
       {/* Router must wrap Layout so Header/Footer Links share the same base as routes */}
-      <WouterRouter base={wouterBase}>
+      <WouterRouter base={wouterBase} hook={useHashLocation}>
         <Layout>
           <AppRoutes />
         </Layout>
